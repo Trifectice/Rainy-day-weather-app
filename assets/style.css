@@ -1,0 +1,34 @@
+
+body {
+    background-color: #A07178;
+    color: #FFFFFF;
+  }
+  
+  
+  header {
+    background-color: #E6CCBE;
+    padding: 20px;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  #search-container {
+    margin-bottom: 20px;
+  }
+  
+  #current-weather {
+    margin-bottom: 20px;
+  }
+  
+  #forecast {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  #search-history {
+    margin-top: 20px;
+  }
+  
