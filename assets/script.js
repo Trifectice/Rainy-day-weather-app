@@ -36,7 +36,8 @@ $(document).ready(function() {
   
           // Set the API endpoint for the forecast
           const forecastEndpoint = `${apiEndpoint}/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-  
+    
+          console.log(response)
           // Make the API call to get the forecast data
           $.ajax({
             url: forecastEndpoint,
@@ -73,11 +74,18 @@ $(document).ready(function() {
   
       // Create the HTML structure for current weather
       const currentWeatherHTML = `
-        <h2>${name} - ${dateTime}</h2>
-        <img src="https://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
-        <p>Temperature: ${main.temp} °F</p>
-        <p>Humidity: ${main.humidity}%</p>
-        <p>Wind Speed: ${wind.speed} mph</p>
+        <div class="card">
+          <div class="card-front">
+            <h2>${name}</h2>
+            <img src="https://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
+          </div>
+          <div class="card-back">
+            <h2>${name} - ${dateTime}</h2>
+            <p>Temperature: ${main.temp} °F</p>
+            <p>Humidity: ${main.humidity}%</p>
+            <p>Wind Speed: ${wind.speed} mph</p>
+          </div>
+        </div>
       `;
   
       // Append the current weather HTML to the container
@@ -101,12 +109,17 @@ $(document).ready(function() {
   
         // Create the HTML structure for each forecast card
         const forecastHTML = `
-          <div class="forecast-card">
-            <h3>${date}</h3>
-            <img src="https://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
-            <p>Temperature: ${main.temp} °F</p>
-            <p>Humidity: ${main.humidity}%</p>
-            <p>Wind Speed: ${wind.speed} mph</p>
+          <div class="card">
+            <div class="card-front">
+              <h3>${date}</h3>
+              <img src="https://openweathermap.org/img/wn/${weather[0].icon}.png" alt="${weather[0].description}">
+            </div>
+            <div class="card-back">
+              <h3>${date}</h3>
+              <p>Temperature: ${main.temp} °F</p>
+              <p>Humidity: ${main.humidity}%</p>
+              <p>Wind Speed: ${wind.speed} mph</p>
+            </div>
           </div>
         `;
   

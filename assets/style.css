@@ -1,9 +1,7 @@
-
 body {
     background-color: #A07178;
     color: #FFFFFF;
   }
-  
   
   header {
     background-color: #E6CCBE;
@@ -16,10 +14,15 @@ body {
   
   #search-container {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
   }
   
   #current-weather {
     margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
   }
   
   #forecast {
@@ -30,5 +33,70 @@ body {
   
   #search-history {
     margin-top: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+
+  .card {
+    width: 200px;
+    height: 250px;
+    perspective: 1000px;
+    margin-bottom: 20px;
+  }
+  
+  .card-front, .card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+  }
+  
+  .card-front {
+    background-color: #E6CCBE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: rotateY(0deg);
+  }
+  
+  .card-back {
+    background-color: #A07178;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: rotateY(180deg);
+  }
+  
+  .card:hover .card-front {
+    transform: rotateY(-180deg);
+  }
+  
+  .card:hover .card-back {
+    transform: rotateY(0deg);
+  }
+  
+  /* Additional styling for the card content */
+  .card h2, .card h3 {
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+  
+  .card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    color: #FFFFFF;
+    margin-bottom: 5px;
   }
   
