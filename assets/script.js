@@ -3,6 +3,12 @@ $(document).ready(function() {
     const apiKey = "f2e56a945f06444047f57848e6e27620";
     const apiEndpoint = "https://api.openweathermap.org/data/2.5";
   
+    // Retrieve the search history from local storage
+    let searchHistory = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  
+    // Display the search history
+    displaySearchHistory();
+  
     // Event listener for the search button
     $("#search-btn").on("click", function() {
       // Get the zip code input value
@@ -28,16 +34,17 @@ $(document).ready(function() {
           // Process the current weather data
           displayCurrentWeather(response);
   
-          // Add the zip code to the search history
-          addZipCodeToSearchHistory(zipCode);
+          // Add the zip code to the search history if it doesn't exist
+          if (!searchHistory.includes(zipCode)) {
+            addZipCodeToSearchHistory(zipCode);
+          }
   
           // Get the coordinates for the forecast
           const { lat, lon } = response.coord;
   
           // Set the API endpoint for the forecast
           const forecastEndpoint = `${apiEndpoint}/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-    
-          console.log(response)
+  
           // Make the API call to get the forecast data
           $.ajax({
             url: forecastEndpoint,
@@ -130,11 +137,30 @@ $(document).ready(function() {
   
     // Function to add the zip code to the search history
     function addZipCodeToSearchHistory(zipCode) {
-      // Create a button element for the zip code
-      const zipCodeButton = `<button class="zip-code-button">${zipCode}</button>`;
+      searchHistory.push(zipCode);
   
-      // Append the button to the search history container
-      $("#search-history").append(zipCodeButton);
+      // Save the updated search history to local storage
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+  
+      // Display the updated search history
+      displaySearchHistory();
+    }
+  
+    // Function to display the search history
+    function displaySearchHistory() {
+      // Clear the search history container
+      $("#search-history").empty();
+  
+      // Loop through the search history
+      for (let i = 0; i < searchHistory.length; i++) {
+        const zipCode = searchHistory[i];
+  
+        // Create a button element for the zip code
+        const zipCodeButton = `<button class="zip-code-button">${zipCode}</button>`;
+  
+        // Append the button to the search history container
+        $("#search-history").append(zipCodeButton);
+      }
     }
   
     // Event listener for the zip code buttons in search history
@@ -145,3 +171,4 @@ $(document).ready(function() {
       getWeatherData(zipCode);
     });
   });
+  
